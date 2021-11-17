@@ -121,17 +121,7 @@ function xoa() {
   $(".congcu").click(function () {
     let mang = localStorage.getItem("mang");
     mang = JSON.parse(mang);
-    var giatri = $(this).attr("data-key");
-    for (var i = 0; i < mang.length; i++) {
-      if (Number(mang[i].id) == Number(giatri)) {
-        mang[i] = 0;
-      }
-    }
-
-    localStorage.removeItem("mang");
-    localStorage.setItem("mang", JSON.stringify(mang));
-    checkag();
-    $(this).remove();
+    del($(this).attr("data-key"));
   });
 }
 
@@ -155,17 +145,16 @@ function timkiem() {
   $("#tencacmuc").append(cacmuctk);
 }
 
-function checkag() {
-  let mang = localStorage.getItem("mang");
-  mang = JSON.parse(mang);
-  let mangmoi = mang.filter(function (e) {
-    return e != 0;
-  });
-
-  localStorage.removeItem("mang");
-  localStorage.setItem("mang", JSON.stringify(mangmoi));
-}
 function loadptnho() {
   let mang = localStorage.getItem("mang");
   mang = JSON.parse(mang);
+}
+function del(id) {
+  let mang = localStorage.getItem("mang");
+  mang = JSON.parse(mang);
+  mang = mang.filter(function (e) {
+    return e.id != id;
+  });
+  localStorage.removeItem("mang");
+  localStorage.setItem("mang", JSON.stringify(mang));
 }
